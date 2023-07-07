@@ -5,7 +5,7 @@ project(age-since-birth)
 add_executable(${PROJECT_NAME} main.c)
 
 add_subdirectory(lib)
-
 target_include_directories(${PROJECT_NAME} PUBLIC lib)
-
 target_link_libraries(${PROJECT_NAME} mylib)
+
+target_compile_features(${PROJECT_NAME} PUBLIC c_std_99)
