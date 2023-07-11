@@ -3,7 +3,7 @@
 #define APP_NAME "age-since-birth"
 #define APP_VERSION "v0.0.1"
 
-void init_app(void)
+void app_init(void)
 {
 	printf("%s %s\n\n", APP_NAME, APP_VERSION);
 }
