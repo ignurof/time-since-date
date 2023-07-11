@@ -1,5 +1,13 @@
 #include <stdio.h>
 
+#define APP_NAME "age-since-birth"
+#define APP_VERSION "v0.0.1"
+
+void init_app(void)
+{
+	printf("%s %s\n\n", APP_NAME, APP_VERSION);
+}
+
 void handle_app_exit(int *should_app_close)
 {
 	char close_option = 'n';

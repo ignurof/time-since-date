@@ -2,16 +2,10 @@
 #include "time_conversion.h"
 #include "app_utils.h"
 
-#define APP_VERSION "v0.0.1"
-
 int main(void)
 {
-	// const char APP_VERSION[6] = "v0.0.1";
-
 	int should_app_close = 0;
 	int date_birth = 0;
-
-	printf("age-since-birth %s\n\n", APP_VERSION);
 
 	while(should_app_close == 0)
 	{
@@ -33,7 +27,7 @@ int main(void)
 		// handle_app_exit(int *);
 		handle_app_exit(&should_app_close);
 	}
-	
+
 	printf("Exiting program...\n");
 
 	return 0;
