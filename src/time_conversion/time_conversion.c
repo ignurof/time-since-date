@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <time.h>
 
-void handle_time_conversion(time_t time_result)
+void handle_time_conversion()
 {
+	time_t time_result = time(NULL);
+
 	if(time_result != (time_t)(-1))
 	{
 		printf("Current time in UTC is %s\n", asctime(gmtime(&time_result)));

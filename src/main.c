@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <time.h>
 #include "time_conversion.h"
 
 int main(void)
@@ -21,10 +20,7 @@ int main(void)
 		int age_result = scanf("%i", &age_input);
 		printf("age_result: %i\n", age_result);
 
-		// TODO: Generate time object
-		// Do something with that after
-		// instead of using this time(NULL) argument so I can remove include time from this file
-		handle_time_conversion(time(NULL));
+		handle_time_conversion();
 
 		printf("Do you want to go again? (y)es / (n)o\n");
 		/*
