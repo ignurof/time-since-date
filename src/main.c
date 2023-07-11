@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <time.h>
-#include <mylib.h>
-
-void handle_time_conversion(time_t);
+#include "time_conversion.h"
 
 int main(void)
 {
@@ -23,6 +21,9 @@ int main(void)
 		int age_result = scanf("%i", &age_input);
 		printf("age_result: %i\n", age_result);
 
+		// TODO: Generate time object
+		// Do something with that after
+		// instead of using this time(NULL) argument so I can remove include time from this file
 		handle_time_conversion(time(NULL));
 
 		printf("Do you want to go again? (y)es / (n)o\n");
@@ -42,20 +43,4 @@ int main(void)
 	printf("Exiting program...\n");
 
 	return 0;
-}
-
-// TODO: put into lib
-void handle_time_conversion(time_t time_result)
-{
-	if(time_result != (time_t)(-1))
-	{
-		printf("Current time in UTC is %s\n", asctime(gmtime(&time_result)));
-		printf("Local: %s\n", asctime(localtime(&time_result)));
-		// TODO: learn structs -> man mktime, man difftime
-		struct tm time_struct = *localtime(&time_result);
-		int current_year = (1900 + time_struct.tm_year);
-		printf("year: %i\n", current_year);
-		int current_month = (1 + time_struct.tm_mon);
-		printf("month: %i\n", current_month);
-	}
 }

@@ -1,7 +1,10 @@
 # age-since-birth
 ## made by ignurof
 
+First setup cmake source and build
 cmake -S . -B build
-make -C build
+Second run the build command from source directory
+make
 
-mylib.h linked through CMakeLists.txt found in both root and lib dir
+To run the app do
+make r
