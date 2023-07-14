@@ -1,5 +1,5 @@
 # age-since-birth
-## v0.1.0
+## v@age-since-birth_VERSION_MAJOR@.@age-since-birth_VERSION_MINOR@.@age-since-birth_VERSION_PATCH@
 
 Build CMake:
 mkdir build

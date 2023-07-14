@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.22.1)
 project(age-since-birth VERSION 0.1.0)
 # Output is relative to binary directory ( build directory )
 configure_file(src/utils/version.h.in ../src/utils/version.h)
+configure_file(src/README.md.in ../README.md)
 
 # add_executable and add_library creates a TARGET
 add_executable(${PROJECT_NAME} src/main.c)
