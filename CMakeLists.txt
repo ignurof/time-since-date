@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.22.1)
 
-project(age-since-birth)
+# MAJOR.MINOR.PATCH - used below
+project(age-since-birth VERSION 0.1.0)
+# Output is relative to binary directory ( build directory )
+configure_file(src/utils/version.h.in ../src/utils/version.h)
 
 # add_executable and add_library creates a TARGET
 add_executable(${PROJECT_NAME} src/main.c)
@@ -18,15 +21,23 @@ set(UTILS
 )
 list(TRANSFORM UTILS PREPEND "src/utils/")
 
+set(VALIDATE_INPUT
+	validate_input.h
+	validate_input.c
+)
+list(TRANSFORM VALIDATE_INPUT PREPEND "src/validate_input/")
+
 target_sources(${PROJECT_NAME} PUBLIC
 	${TIME_CONVERSION}
 	${UTILS}
+	${VALIDATE_INPUT}
 )
 
 # adds the lib subdir to the include path so I can just include "header.h" instead of "subdir/header.h"
 target_include_directories(${PROJECT_NAME} PRIVATE
 	src/time_conversion
 	src/utils
+	src/validate_input
 )
 #add_subdirectory(lib) this adds a directory to the build path
 #target_include_directories(${PROJECT_NAME} PUBLIC lib)

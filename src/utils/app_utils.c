@@ -1,11 +1,11 @@
 #include <stdio.h>
+#include "version.h"
 
 #define APP_NAME "age-since-birth"
-#define APP_VERSION "v0.0.1"
 
 void app_init(void)
 {
-	printf("%s %s\n\n", APP_NAME, APP_VERSION);
+	printf("%s %i %i %i\n\n", APP_NAME, APP_VERSION_MAJOR, APP_VERSION_MINOR, APP_VERSION_PATCH);
 }
 
 void handle_app_exit(int *should_app_close)

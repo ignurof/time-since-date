@@ -1,0 +1,3 @@
+#define APP_VERSION_MAJOR @age-since-birth_VERSION_MAJOR@
+#define APP_VERSION_MINOR @age-since-birth_VERSION_MINOR@
+#define APP_VERSION_PATCH @age-since-birth_VERSION_PATCH@

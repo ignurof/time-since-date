@@ -1,11 +1,25 @@
 #include <stdio.h>
 #include "time_conversion.h"
 #include "app_utils.h"
+#include "validate_input.h"
+
+// This is a struct, to access the struct you must create a variable of it
+struct date_birth_obj { // Struct declaration
+	int date; // Member variable of the struct
+}; // Always end structs with semicolon!
+
 
 int main(void)
 {
+	app_init();	
+
 	int should_app_close = 0;
 	int date_birth = 0;
+
+	// Create a struct variable
+	struct date_birth_obj dbo;
+	dbo.date = 100;
+	printf("dbo.date: %i\n", dbo.date);
 
 	while(should_app_close == 0)
 	{
@@ -16,6 +30,10 @@ int main(void)
 		// https://stackoverflow.com/questions/13542055/how-to-do-scanf-for-single-char-in-c
 		int date_birth_input = scanf("%i", &date_birth);
 		printf("date_birth_input: %i\n", date_birth_input);
+
+		// C is pass by value, so I don't need a pointer adress here
+		// since there is no modication of the variable going on, only value read
+		validate_date_input(date_birth);	
 
 		// TODO: this should return a human-readable struct that can be used to print out all the values we might want
 		// ie; seconds since birth, hours, days etc etc
@@ -32,5 +50,3 @@ int main(void)
 
 	return 0;
 }
-
-
