@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "version.h"
+#include "app_utils.h"
 
 #define APP_NAME "age-since-birth"
 

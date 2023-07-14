@@ -1,13 +1,14 @@
 #include <stdio.h>
+#include "validate_input.h"
 
-void validate_date_input(int date_birth_input)
+int validate_date(int date_birth_input)
 {
-	if(date_birth_input >= 19000101 || date_birth_input <= 20500101)
+	// TODO: Actual validation that checks for a VALID date input
+	if(date_birth_input < 19000101 || date_birth_input > 20500101)
 	{
-		printf("Successfull input");
+		printf("Invalid date input!\n");
+		return 0;
 	}
-	else
-	{
-		printf("Error!");
-	}
+
+	return 1;
 }
