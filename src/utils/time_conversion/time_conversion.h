@@ -6,6 +6,12 @@ typedef struct time_object
 {
 	int year;
 	int month;
+	int day_in_month;
+	int hour;
+	int min;
+	int sec;
+	int week_day;
+	int day_in_year;
 } time_object;
 
 time_object handle_time_conversion(void);

@@ -26,8 +26,19 @@ int main(void)
 		if(validate_date_input == 0)
 			return 1;
 		
-		time_object my_time = handle_time_conversion();
-		//printf("%i, %i\n", time.year, time.month);
+		time_object time = handle_time_conversion();
+		printf("year: %i, month: %i, day_in_month: %i, week_day: %i\n",
+				time.year,
+				time.month,
+				time.day_in_month,
+				time.week_day
+			  );
+		printf("day_in_year: %i, hour: %i, min: %i, sec: %i\n",
+				time.day_in_year,
+				time.hour,
+				time.min,
+				time.sec
+			  );
 
 		// C pass variables by value, so to change a variable inside of the function scope
 		// I need to pass the adress of the variable, and a adress is a pointer variable
