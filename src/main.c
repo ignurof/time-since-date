@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "time_conversion.h"
 #include "app_utils.h"
+#include "time_conversion.h"
 #include "validate_input.h"
 
 int main(void)
@@ -44,6 +44,7 @@ int main(void)
 		// I need to pass the adress of the variable, and a adress is a pointer variable
 		// That means the function should take a int pointer as we are trying to change the value of an int
 		// handle_app_exit(int *);
+		// future me: this was a great comment!
 		handle_app_exit(&should_app_close);
 	}
 
