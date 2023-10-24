@@ -1,14 +1,9 @@
 # age-since-birth
 ## v0.1.0
 
-Build CMake:
-mkdir build
-cmake -S . -B build/
-
 Build app:
-make
+gcc -o build/app src/*.c
 
 Run app:
-make r
+./build/app
 
-Both make commands also work in src/
