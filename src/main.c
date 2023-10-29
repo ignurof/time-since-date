@@ -1,12 +1,8 @@
 #include <stdio.h>
-#include "app_utils.h"
-#include "time_conversion.h"
-#include "validate_input.h"
+#include "utils.h"
 
 int main(void)
 {
-	app_init();	
-
 	int should_app_close = 0;
 	int date_birth = 0;
 
