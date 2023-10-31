@@ -186,11 +186,20 @@ int main(void)
 
 			days_since_birth += current_day_birth_conversion;
 		}
-		printf("Days since birth: %i\n\n", days_since_birth);
+		printf("Days since birth: %i\n", days_since_birth);
 
 		int hours_since_birth = days_since_birth * 24 - 24 + time.hour;
 		hours_since_birth += 24 - hour_birth;
+		// tror jag måste ta bort en för att räkna minuterna istället
+		hours_since_birth -= 1;
 		printf("Hours since birth: %i\n", hours_since_birth);
+
+		int minutes_since_birth = hours_since_birth * 60 + time.min;
+		minutes_since_birth += 60 - minute_birth; 
+		printf("Minutes since birth: %i\n", minutes_since_birth);
+
+		int seconds_since_birth = 0;
+		printf("Seconds since birth: %i\n", seconds_since_birth);
 
 		// C pass variables by value, so to change a variable inside of the function scope
 		// I need to pass the adress of the variable, and a adress is a pointer variable
