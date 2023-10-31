@@ -3,8 +3,13 @@
 
 #define APP_NAME "age-since-birth"
 
+#define TRUE 1
+#define FALSE 0
+
 void handle_app_exit(int*);
-int validate_date(int);
+int validate_year(int);
+int validate_month(int);
+int validate_day(int);
 
 // We need the struct definition here so it can be used wherever the header is #included
 typedef struct

@@ -26,18 +26,6 @@ void handle_app_exit(int* should_app_close)
 	printf("Restarting...\n");
 }
 
-int validate_date(int date_birth_input)
-{
-	//TODO: Validation that checks for a VALID date input
-	if(date_birth_input < 19000101 || date_birth_input > 20500101)
-	{
-		printf("Invalid date input!\n");
-		return 0;
-	}
-
-	return 1;
-}
-
 time_object handle_time_conversion(void)
 {
 	// How to use time:
@@ -69,4 +57,36 @@ time_object handle_time_conversion(void)
 	}
 
 	return to;
+}
+
+int validate_year(int year)
+{
+	if(year < 1900 || year > 2050)
+	{
+		printf("Invalid year input!\n");
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+int validate_month(int month)
+{
+	if(month < 1 || month > 12)
+	{
+		printf("Invalid month input!\n");
+		return FALSE;
+	}
+	return TRUE;
+}
+
+int validate_day(int day)
+{
+	if(day < 1 || day > 31)
+	{
+		printf("Invalid day input!\n");
+		return FALSE;
+	}
+
+	return TRUE;
 }
