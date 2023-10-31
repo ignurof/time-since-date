@@ -10,6 +10,8 @@ void handle_app_exit(int*);
 int validate_year(int);
 int validate_month(int);
 int validate_day(int);
+int validate_hour(int);
+int validate_minute(int);
 
 // We need the struct definition here so it can be used wherever the header is #included
 typedef struct

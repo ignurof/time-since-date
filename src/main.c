@@ -22,29 +22,51 @@ int main(void)
 	int year_birth = 0;
 	int month_birth = 0;
 	int day_birth = 0;
+	int hour_birth = 0;
+	int minute_birth = 0;
 
 	while(should_app_close == 0)
 	{
+		// DEBUG
+		year_birth = 2023;
+		month_birth = 1;
+		day_birth = 5;
+		hour_birth = 9;
+		minute_birth = 42;
+		// DEBUG
+
 		printf("Year of birth (19XX): ");
 		// This creates a stray newline for the next input in the stream
 		// all scanf after this should have a blank space before the conversion specifier in the format string
 		// https://stackoverflow.com/questions/13542055/how-to-do-scanf-for-single-char-in-c
-		scanf("%i", &year_birth);
+		//scanf("%i", &year_birth);
 		int validate_year_input = validate_year(year_birth);
 		if(validate_year_input == 0)
 			return 1;
 
 		printf("Month of birth (1-12): ");
-		scanf(" %i", &month_birth);
+		//scanf(" %i", &month_birth);
 		int validate_month_input = validate_month(month_birth);
 		if(validate_month_input == 0)
 			return 2;
 
 		printf("Day of birth(1-31): ");
-		scanf(" %i", &day_birth);
+		//scanf(" %i", &day_birth);
 		int validate_day_input = validate_day(day_birth);
 		if(validate_day_input == 0)
 			return 3;
+
+		printf("Hour of birth (0-23): ");
+		//scanf(" %i", &hour_birth);
+		int validate_hour_input = validate_hour(hour_birth);
+		if(validate_hour_input == 0)
+			return 4;
+
+		printf("Minute of birth (0-59): ");
+		//scanf(" %i", &minute_birth);
+		int validate_minute_input = validate_minute(minute_birth);
+		if(validate_minute_input == 0)
+			return 5;
 		
 		printf("Getting current time...\n\n");
 		time_object time = handle_time_conversion();
@@ -165,6 +187,10 @@ int main(void)
 			days_since_birth += current_day_birth_conversion;
 		}
 		printf("Days since birth: %i\n\n", days_since_birth);
+
+		int hours_since_birth = days_since_birth * 24 - 24 + time.hour;
+		hours_since_birth += 24 - hour_birth;
+		printf("Hours since birth: %i\n", hours_since_birth);
 
 		// C pass variables by value, so to change a variable inside of the function scope
 		// I need to pass the adress of the variable, and a adress is a pointer variable

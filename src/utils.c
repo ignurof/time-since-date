@@ -90,3 +90,15 @@ int validate_day(int day)
 
 	return TRUE;
 }
+
+int validate_hour(int hour)
+{
+	// TODO
+	return TRUE;
+}
+
+int validate_minute(int minute)
+{
+	// TODO
+	return TRUE;
+}
