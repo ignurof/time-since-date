@@ -87,6 +87,7 @@ int main(void)
 
 		int current_month_birth_conversion = time.month - month_birth;
 		// if age has not reached the birth month yet, convert year and month correctly
+		// ie: 28 years -2 months -> 27 years 10 months
 		if(current_month_birth_conversion < 0)
 		{
 			int x = 12;
@@ -96,7 +97,7 @@ int main(void)
 		}
 
 		int current_day_birth_conversion = time.day_in_month - day_birth;
-		int months_since_birth = 0.0;
+		int months_since_birth = 0;
 		int days_since_birth = 0;
 		int year_date = year_birth;
 		int i;
@@ -114,10 +115,12 @@ int main(void)
 			year_date += 1;
 		}
 		
+		// TODO: Fixa så det inte står 10 månader -4 dagar nu när det är 4 dagar kvar.
+		// det borde stå typ 9 månader och XX dagar.
 		printf("%i years old, %i months and %i days\n", years_since_birth, current_month_birth_conversion, current_day_birth_conversion);
 
 		printf("Years since birth: %i\n", years_since_birth);
-		
+
 		months_since_birth = years_since_birth * 12 + current_month_birth_conversion;
 		printf("Months since birth: %i\n", months_since_birth);
 
