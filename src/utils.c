@@ -102,3 +102,9 @@ int validate_minute(int minute)
 	// TODO
 	return TRUE;
 }
+
+int validate_second(int second)
+{
+	// TODO
+	return TRUE;
+}

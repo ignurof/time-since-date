@@ -37,6 +37,7 @@ int main(void)
 	int day_date = 0;
 	int hour_date = 0;
 	int minute_date = 0;
+	int second_date = 0;
 
 	while(should_app_close == 0)
 	{
@@ -46,40 +47,47 @@ int main(void)
 		day_date = 5;
 		hour_date = 9;
 		minute_date = 42;
+		second_date = 0;
 		// DEBUG
 
 		printf("Year of date (19XX): ");
 		// This creates a stray newline for the next input in the stream
 		// all scanf after this should have a blank space before the conversion specifier in the format string
 		// https://stackoverflow.com/questions/13542055/how-to-do-scanf-for-single-char-in-c
-		//scanf("%i", &year_birth);
+		//scanf("%i", &year_date);
 		int validate_year_input = validate_year(year_date);
 		if(validate_year_input == 0)
 			return 1;
 
 		printf("Month of date (1-12): ");
-		//scanf(" %i", &month_birth);
+		//scanf(" %i", &month_date);
 		int validate_month_input = validate_month(month_date);
 		if(validate_month_input == 0)
 			return 2;
 
 		printf("Day of date (1-31): ");
-		//scanf(" %i", &day_birth);
+		//scanf(" %i", &day_date);
 		int validate_day_input = validate_day(day_date);
 		if(validate_day_input == 0)
 			return 3;
 
 		printf("Hour of date (0-23): ");
-		//scanf(" %i", &hour_birth);
+		//scanf(" %i", &hour_date);
 		int validate_hour_input = validate_hour(hour_date);
 		if(validate_hour_input == 0)
 			return 4;
 
 		printf("Minute of date (0-59): ");
-		//scanf(" %i", &minute_birth);
+		//scanf(" %i", &minute_date);
 		int validate_minute_input = validate_minute(minute_date);
 		if(validate_minute_input == 0)
 			return 5;
+
+		printf("Second of date (0-59): ");
+		//scanf(" %i", &second_date);
+		int validate_second_input = validate_second(second_date);
+		if(validate_second_input == 0)
+			return 6;
 
 		printf("Getting current time...\n\n");
 		time_object converted_time = handle_time_conversion();
