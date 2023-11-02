@@ -136,8 +136,8 @@ int main(void)
 			iterate_year_date += 1;
 		}
 
-		// TODO: Fixa så det inte står 10 månader -4 dagar nu när det är 4 dagar kvar.
-		// det borde stå typ 9 månader och XX dagar.
+		// avoid case where the day_date is not yet reached
+		// so we need to adjust the month and days
 		if(current_day_date_count < 0)
 		{
 			current_month_date_count -= 1;
@@ -268,10 +268,12 @@ int main(void)
 		printf("Hours since date: %i\n", hours_since_date);
 
 		int minutes_since_date = hours_since_date * 60 + converted_time.min;
-		minutes_since_date += 60 - minute_date; 
+		minutes_since_date += 60 - minute_date;
+		// remove 1 to account for the seconds until the full Minute
+		minutes_since_date -= 1;
 		printf("Minutes since date: %i\n", minutes_since_date);
 
-		int seconds_since_date = 0;
+		int seconds_since_date = minutes_since_date * 60 + converted_time.sec;
 		printf("Seconds since date: %i\n", seconds_since_date);
 
 		// C pass variables by value, so to change a variable inside of the function scope
