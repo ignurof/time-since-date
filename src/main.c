@@ -1,6 +1,19 @@
 #include <stdio.h>
 #include "utils.h"
 
+//  JANUARY = 31,
+//	FEBRUARY = 28,
+//	MARCH = 31,
+//	APRIL = 30,
+//	MAY = 31,
+//	JUNE = 30,
+//	JULY = 31,
+//	AUGUST = 31,
+//	SEPTEMBER = 30,
+//	OCTOBER = 31,
+//	NOVEMBER = 30,
+//	DECEMBER = 31
+
 enum {
 	JANUARY = 0,
 	FEBRUARY = 1,
@@ -117,6 +130,66 @@ int main(void)
 
 		// TODO: Fixa så det inte står 10 månader -4 dagar nu när det är 4 dagar kvar.
 		// det borde stå typ 9 månader och XX dagar.
+		if(current_day_date_count < 0)
+		{
+			current_month_date_count -= 1;
+			// here we need to make sure month index is back to 0
+			// then account for the previous month not current month
+			switch(converted_time.month - 1)
+			{
+				case JANUARY:
+					// DECEMBER 
+					current_day_date_count = 31 + current_day_date_count;
+					break;
+				case FEBRUARY:
+					// JANUARY
+					current_day_date_count = 31 + current_day_date_count;
+					break;
+				case MARCH:
+					// FEBRUARY
+					current_day_date_count = 28 + current_day_date_count;
+					if(year_date % 4 == 0) // leap year
+						current_day_date_count += 1;
+					break;
+				case APRIL:
+					// MARCH
+					current_day_date_count = 31 + current_day_date_count;
+					break;
+				case MAY:
+					// APRIL
+					current_day_date_count = 30 + current_day_date_count;
+					break;
+				case JUNE:
+					// MAY
+					current_day_date_count = 31 + current_day_date_count;
+					break;
+				case JULY:
+					// JUNE
+					current_day_date_count = 30 + current_day_date_count;
+					break;
+				case AUGUST:
+					// JULY
+					current_day_date_count = 31 + current_day_date_count;
+					break;
+				case SEPTEMBER:
+					// AUGUST
+					current_day_date_count = 31 + current_day_date_count;
+					break;
+				case OCTOBER:
+					// SEPTEMBER
+					current_day_date_count = 30 + current_day_date_count;
+					break;
+				case NOVEMBER:
+					// OCTOBER
+					current_day_date_count = 31 + current_day_date_count;
+					break;
+				case DECEMBER:
+					// NOVEMBER
+					current_day_date_count = 30 + current_day_date_count;
+					break;
+			}
+		}
+
 		printf("%i years, %i months and %i days\n", years_since_date, current_month_date_count, current_day_date_count);
 
 		printf("Years since date: %i\n", years_since_date);
@@ -129,18 +202,6 @@ int main(void)
 		// calculcate correct days since date
 		if(years_since_date == 0)
 		{
-			//  JANUARY = 31,
-			//	FEBRUARY = 28,
-			//	MARCH = 31,
-			//	APRIL = 30,
-			//	MAY = 31,
-			//	JUNE = 30,
-			//	JULY = 31,
-			//	AUGUST = 31,
-			//	SEPTEMBER = 30,
-			//	OCTOBER = 31,
-			//	NOVEMBER = 30,
-			//	DECEMBER = 31
 			days_since_date = 0;
 			int j;
 			for(j = 0; j < current_month_date_count; j++)
