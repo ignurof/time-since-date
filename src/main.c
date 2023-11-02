@@ -19,114 +19,115 @@ enum {
 int main(void)
 {
 	int should_app_close = 0;
-	int year_birth = 0;
-	int month_birth = 0;
-	int day_birth = 0;
-	int hour_birth = 0;
-	int minute_birth = 0;
+	int year_date = 0;
+	int month_date = 0;
+	int day_date = 0;
+	int hour_date = 0;
+	int minute_date = 0;
 
 	while(should_app_close == 0)
 	{
 		// DEBUG
-		year_birth = 2023;
-		month_birth = 1;
-		day_birth = 5;
-		hour_birth = 9;
-		minute_birth = 42;
+		year_date = 2023;
+		month_date = 1;
+		day_date = 5;
+		hour_date = 9;
+		minute_date = 42;
 		// DEBUG
 
-		printf("Year of birth (19XX): ");
+		printf("Year of date (19XX): ");
 		// This creates a stray newline for the next input in the stream
 		// all scanf after this should have a blank space before the conversion specifier in the format string
 		// https://stackoverflow.com/questions/13542055/how-to-do-scanf-for-single-char-in-c
 		//scanf("%i", &year_birth);
-		int validate_year_input = validate_year(year_birth);
+		int validate_year_input = validate_year(year_date);
 		if(validate_year_input == 0)
 			return 1;
 
-		printf("Month of birth (1-12): ");
+		printf("Month of date (1-12): ");
 		//scanf(" %i", &month_birth);
-		int validate_month_input = validate_month(month_birth);
+		int validate_month_input = validate_month(month_date);
 		if(validate_month_input == 0)
 			return 2;
 
-		printf("Day of birth(1-31): ");
+		printf("Day of date (1-31): ");
 		//scanf(" %i", &day_birth);
-		int validate_day_input = validate_day(day_birth);
+		int validate_day_input = validate_day(day_date);
 		if(validate_day_input == 0)
 			return 3;
 
-		printf("Hour of birth (0-23): ");
+		printf("Hour of date (0-23): ");
 		//scanf(" %i", &hour_birth);
-		int validate_hour_input = validate_hour(hour_birth);
+		int validate_hour_input = validate_hour(hour_date);
 		if(validate_hour_input == 0)
 			return 4;
 
-		printf("Minute of birth (0-59): ");
+		printf("Minute of date (0-59): ");
 		//scanf(" %i", &minute_birth);
-		int validate_minute_input = validate_minute(minute_birth);
+		int validate_minute_input = validate_minute(minute_date);
 		if(validate_minute_input == 0)
 			return 5;
-		
+
 		printf("Getting current time...\n\n");
-		time_object time = handle_time_conversion();
+		time_object converted_time = handle_time_conversion();
 		printf("year: %i, month: %i, day_in_month: %i, week_day: %i\n",
-				time.year,
-				time.month,
-				time.day_in_month,
-				time.week_day
+				converted_time.year,
+				converted_time.month,
+				converted_time.day_in_month,
+				converted_time.week_day
 			  );
 		printf("day_in_year: %i, hour: %i, min: %i, sec: %i\n\n",
-				time.day_in_year,
-				time.hour,
-				time.min,
-				time.sec
+				converted_time.day_in_year,
+				converted_time.hour,
+				converted_time.min,
+				converted_time.sec
 			  );
 
-		int years_since_birth = time.year - year_birth;
+		int years_since_date = converted_time.year - year_date;
 
-		int current_month_birth_conversion = time.month - month_birth;
+		int current_month_date_count = converted_time.month - month_date;
 		// if age has not reached the birth month yet, convert year and month correctly
 		// ie: 28 years -2 months -> 27 years 10 months
-		if(current_month_birth_conversion < 0)
+		if(current_month_date_count < 0)
 		{
 			int x = 12;
-			x += current_month_birth_conversion;
-			current_month_birth_conversion = x;
-			years_since_birth -= 1;
+			x += current_month_date_count;
+			current_month_date_count = x;
+			years_since_date -= 1;
 		}
 
-		int current_day_birth_conversion = time.day_in_month - day_birth;
-		int months_since_birth = 0;
-		int days_since_birth = 0;
-		int year_date = year_birth;
+		int current_day_date_count = converted_time.day_in_month - day_date;
+		int months_since_date = 0;
+		int days_since_date = 0;
+		int iterate_year_date = year_date;
 		int i;
-		for(i = 0; i < years_since_birth; i++)
+		for(i = 0; i < years_since_date; i++)
 		{
-			if(year_date % 4 == 0)
+			if(iterate_year_date % 4 == 0)
 			{
-				days_since_birth += 366;
+				days_since_date += 366;
 			}
 			else
 			{
-				days_since_birth += 365;
+				days_since_date += 365;
 			}
 
-			year_date += 1;
+			iterate_year_date += 1;
 		}
-		
+
 		// TODO: Fixa så det inte står 10 månader -4 dagar nu när det är 4 dagar kvar.
 		// det borde stå typ 9 månader och XX dagar.
-		printf("%i years old, %i months and %i days\n", years_since_birth, current_month_birth_conversion, current_day_birth_conversion);
+		printf("%i years, %i months and %i days\n", years_since_date, current_month_date_count, current_day_date_count);
 
-		printf("Years since birth: %i\n", years_since_birth);
+		printf("Years since date: %i\n", years_since_date);
 
-		months_since_birth = years_since_birth * 12 + current_month_birth_conversion;
-		printf("Months since birth: %i\n", months_since_birth);
+		months_since_date = years_since_date * 12 + current_month_date_count;
+		printf("Months since date: %i\n", months_since_date);
 
-		days_since_birth = current_day_birth_conversion + days_since_birth;
+		days_since_date = current_day_date_count + days_since_date;
 
-		if(years_since_birth == 0)
+		// calculcate correct days since date
+		if(years_since_date == 0)
 		{
 			//  JANUARY = 31,
 			//	FEBRUARY = 28,
@@ -140,69 +141,69 @@ int main(void)
 			//	OCTOBER = 31,
 			//	NOVEMBER = 30,
 			//	DECEMBER = 31
-			days_since_birth = 0;
+			days_since_date = 0;
 			int j;
-			for(j = 0; j < current_month_birth_conversion; j++)
+			for(j = 0; j < current_month_date_count; j++)
 			{
 				switch(j)
 				{
 					case JANUARY:
-						days_since_birth += 31;
+						days_since_date += 31;
 						break;
 					case FEBRUARY:
-						days_since_birth += 28;
+						days_since_date += 28;
 						if(year_date % 4 == 0) // leap year
-							days_since_birth += 1;
+							days_since_date += 1;
 						break;
 					case MARCH:
-						days_since_birth += 31;
+						days_since_date += 31;
 						break;
 					case APRIL:
-						days_since_birth += 30;
+						days_since_date += 30;
 						break;
 					case MAY:
-						days_since_birth += 31;
+						days_since_date += 31;
 						break;
 					case JUNE:
-						days_since_birth += 30;
+						days_since_date += 30;
 						break;
 					case JULY:
-						days_since_birth += 31;
+						days_since_date += 31;
 						break;
 					case AUGUST:
-						days_since_birth += 31;
+						days_since_date += 31;
 						break;
 					case SEPTEMBER:
-						days_since_birth += 30;
+						days_since_date += 30;
 						break;
 					case OCTOBER:
-						days_since_birth += 31;
+						days_since_date += 31;
 						break;
 					case NOVEMBER:
-						days_since_birth += 30;
+						days_since_date += 30;
 						break;
 					case DECEMBER:
-						days_since_birth += 31;
+						days_since_date += 31;
 						break;
 				}
 			}
 
-			days_since_birth += current_day_birth_conversion;
+			days_since_date += current_day_date_count;
 		}
-		printf("Days since birth: %i\n", days_since_birth);
+		printf("Days since date: %i\n", days_since_date);
 
-		int hours_since_birth = days_since_birth * 24 - 24 + time.hour;
-		hours_since_birth += 24 - hour_birth;
-		// tror jag måste ta bort en för att räkna minuterna istället
-		hours_since_birth -= 1;
-		printf("Hours since birth: %i\n", hours_since_birth);
+		int hours_since_date = days_since_date * 24 - 24 + converted_time.hour;
+		hours_since_date += 24 - hour_date;
+		// remove 1 to account for the minutes until the full hour	
+		hours_since_date -= 1;
+		printf("Hours since date: %i\n", hours_since_date);
 
-		int minutes_since_birth = hours_since_birth * 60 + time.min;
-		minutes_since_birth += 60 - minute_birth; 
-		printf("Minutes since birth: %i\n", minutes_since_birth);
+		int minutes_since_date = hours_since_date * 60 + converted_time.min;
+		minutes_since_date += 60 - minute_date; 
+		printf("Minutes since date: %i\n", minutes_since_date);
 
-		int seconds_since_birth = 0;
-		printf("Seconds since birth: %i\n", seconds_since_birth);
+		int seconds_since_date = 0;
+		printf("Seconds since date: %i\n", seconds_since_date);
 
 		// C pass variables by value, so to change a variable inside of the function scope
 		// I need to pass the adress of the variable, and a adress is a pointer variable
