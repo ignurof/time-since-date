@@ -290,13 +290,19 @@ int main(void)
 		int hours_since_date = days_since_date * 24 - 24 + converted_time.hour;
 		// account for the hours on the day of the start date
 		hours_since_date += 24 - hour_date;
-		printf("Hours since date: %i\n", hours_since_date);
 
 		int minutes_since_date = hours_since_date * 60;
 		minutes_since_date += converted_time.min - minute_date;
-		printf("Minutes since date: %i\n", minutes_since_date);
+		if(converted_time.min - minute_date < 0)
+		{
+			// if the hour is not reached yet make sure to account for that
+			hours_since_date -= 1;
+		}
 
 		int seconds_since_date = minutes_since_date * 60 + converted_time.sec;
+
+		printf("Hours since date: %i\n", hours_since_date);
+		printf("Minutes since date: %i\n", minutes_since_date);
 		printf("Seconds since date: %i\n", seconds_since_date);
 
 		// C pass variables by value, so to change a variable inside of the function scope
