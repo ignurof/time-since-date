@@ -106,6 +106,7 @@ int main(void)
 
 		int years_since_date = converted_time.year - year_date;
 
+		// current_x_date_count details the current months of the year, or days of the month
 		int current_month_date_count = converted_time.month - month_date;
 		// if age has not reached the birth month yet, convert year and month correctly
 		// ie: 28 years -2 months -> 27 years 10 months
@@ -197,9 +198,31 @@ int main(void)
 					break;
 			}
 		}
+	
+		// TODO: Fixa rätt här
+		int current_hour_date_count = converted_time.hour - hour_date;
+		if(current_hour_date_count < 0)
+		{
+			current_hour_date_count = 24 + current_hour_date_count;
+			current_day_date_count -= 1;
+		}
+		int current_minute_date_count = converted_time.min - minute_date;
+		if(current_minute_date_count < 0)
+		{
+			current_minute_date_count = 60 + current_minute_date_count;
+			current_hour_date_count -= 1;
+		}
+		int current_second_date_count = 0;
+		printf("%i years, %i months, %i days, %i hours, %i minutes, %i seconds\n", 
+				years_since_date, 
+				current_month_date_count, 
+				current_day_date_count, 
+				current_hour_date_count, 
+				current_minute_date_count, 
+				current_second_date_count
+			  );
 
-		printf("%i years, %i months and %i days\n", years_since_date, current_month_date_count, current_day_date_count);
-
+		// Allt nedan här borde vara korrekt, men kan behöva ändras efter ovan är gjort
 		printf("Years since date: %i\n", years_since_date);
 
 		months_since_date = years_since_date * 12 + current_month_date_count;
@@ -263,14 +286,10 @@ int main(void)
 
 		int hours_since_date = days_since_date * 24 - 24 + converted_time.hour;
 		hours_since_date += 24 - hour_date;
-		// remove 1 to account for the minutes until the full hour	
-		hours_since_date -= 1;
 		printf("Hours since date: %i\n", hours_since_date);
 
 		int minutes_since_date = hours_since_date * 60 + converted_time.min;
 		minutes_since_date += 60 - minute_date;
-		// remove 1 to account for the seconds until the full Minute
-		minutes_since_date -= 1;
 		printf("Minutes since date: %i\n", minutes_since_date);
 
 		int seconds_since_date = minutes_since_date * 60 + converted_time.sec;
