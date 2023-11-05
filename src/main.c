@@ -199,7 +199,6 @@ int main(void)
 			}
 		}
 	
-		// TODO: Fixa rätt här
 		int current_hour_date_count = converted_time.hour - hour_date;
 		if(current_hour_date_count < 0)
 		{
@@ -212,7 +211,12 @@ int main(void)
 			current_minute_date_count = 60 + current_minute_date_count;
 			current_hour_date_count -= 1;
 		}
-		int current_second_date_count = 0;
+		int current_second_date_count = converted_time.sec - second_date;
+		if(current_second_date_count < 0)
+		{
+			current_second_date_count = 60 + current_second_date_count;
+			current_minute_date_count -= 1;
+		}
 		printf("%i years, %i months, %i days, %i hours, %i minutes, %i seconds\n", 
 				years_since_date, 
 				current_month_date_count, 
@@ -222,7 +226,6 @@ int main(void)
 				current_second_date_count
 			  );
 
-		// Allt nedan här borde vara korrekt, men kan behöva ändras efter ovan är gjort
 		printf("Years since date: %i\n", years_since_date);
 
 		months_since_date = years_since_date * 12 + current_month_date_count;
@@ -285,11 +288,12 @@ int main(void)
 		printf("Days since date: %i\n", days_since_date);
 
 		int hours_since_date = days_since_date * 24 - 24 + converted_time.hour;
+		// account for the hours on the day of the start date
 		hours_since_date += 24 - hour_date;
 		printf("Hours since date: %i\n", hours_since_date);
 
-		int minutes_since_date = hours_since_date * 60 + converted_time.min;
-		minutes_since_date += 60 - minute_date;
+		int minutes_since_date = hours_since_date * 60;
+		minutes_since_date += converted_time.min - minute_date;
 		printf("Minutes since date: %i\n", minutes_since_date);
 
 		int seconds_since_date = minutes_since_date * 60 + converted_time.sec;
