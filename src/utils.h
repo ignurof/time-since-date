@@ -29,4 +29,33 @@ typedef struct
 
 time_object handle_time_conversion(void);
 
+//  JANUARY = 31,
+//	FEBRUARY = 28,
+//	MARCH = 31,
+//	APRIL = 30,
+//	MAY = 31,
+//	JUNE = 30,
+//	JULY = 31,
+//	AUGUST = 31,
+//	SEPTEMBER = 30,
+//	OCTOBER = 31,
+//	NOVEMBER = 30,
+//	DECEMBER = 31
+
+enum {
+	JANUARY = 0,
+	FEBRUARY = 1,
+	MARCH = 2,
+	APRIL = 3,
+	MAY = 4,
+	JUNE = 5,
+	JULY = 6,
+	AUGUST = 7,
+	SEPTEMBER = 8,
+	OCTOBER = 9,
+	NOVEMBER = 10,
+	DECEMBER = 11
+};
+
+
 #endif
