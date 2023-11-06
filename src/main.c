@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "utils.h"
 
-
 int main(void)
 {
 	int should_app_close = 0;
@@ -291,7 +290,6 @@ int main(void)
 		handle_app_exit(&should_app_close);
 	}
 
-	printf("Exiting program...\n");
 
 	return 0;
 }

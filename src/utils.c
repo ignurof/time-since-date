@@ -21,6 +21,8 @@ void handle_app_exit(int* should_app_close)
 		// Need to "dereference" the pointer to change value located at memory address.
 		// a pointer tag (*) on a pointer address variable dereferences the pointer.
 		*should_app_close = 1;
+
+		printf("Exiting program...\n");
 	}
 
 	printf("Restarting...\n");
@@ -45,7 +47,7 @@ time_object handle_time_conversion(void)
 	if(time_result != (time_t)(-1))
 	{
 		struct tm time_struct = *localtime(&time_result);
-		
+
 		to.year = 1900 + time_struct.tm_year;
 		to.month = 1 + time_struct.tm_mon;
 		to.day_in_month = time_struct.tm_mday;
