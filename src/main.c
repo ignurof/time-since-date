@@ -198,7 +198,7 @@ int main(void)
 					break;
 			}
 		}
-	
+
 		int current_hour_date_count = converted_time.hour - hour_date;
 		if(current_hour_date_count < 0)
 		{
@@ -285,6 +285,11 @@ int main(void)
 
 			days_since_date += current_day_date_count;
 		}
+
+		int weeks_since_date = days_since_date / 7;
+		printf("Weeks since date: %i\n", weeks_since_date);
+
+
 		printf("Days since date: %i\n", days_since_date);
 
 		int hours_since_date = days_since_date * 24 - 24 + converted_time.hour;
