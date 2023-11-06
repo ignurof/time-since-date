@@ -1,6 +1,8 @@
 # time-since-date 
 
 ## Changelog
+### v0.1.2
+- Add weeks since date calculation.
 ### v0.1.1
 - Add some calculations to time differences to get the actual time since date.
 ### v0.1.0
