@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include "utils.h"
 
+// Program should handle frontend (input, output)
+// Library should handle backend (calculations)
+
+
+
 int main(void)
 {
 	int should_app_close = 0;
@@ -61,23 +66,8 @@ int main(void)
 		if(validate_second_input == 0)
 			return 6;
 
-		printf("Getting current time...\n\n");
+		
 		time_object converted_time = handle_time_conversion();
-
-		printf("year: %i, month: %i, day_in_month: %i, week_day: %i\n",
-				converted_time.year,
-				converted_time.month,
-				converted_time.day_in_month,
-				converted_time.week_day
-			  );
-
-		printf("day_in_year: %i, hour: %i, min: %i, sec: %i\n\n",
-				converted_time.day_in_year,
-				converted_time.hour,
-				converted_time.min,
-				converted_time.sec
-			  );
-
 		int years_since_date = converted_time.year - year_date;
 
 		// current_x_date_count details the current months of the year, or days of the month
@@ -194,19 +184,7 @@ int main(void)
 			current_minute_date_count -= 1;
 		}
 
-		printf("%i years, %i months, %i days, %i hours, %i minutes, %i seconds\n", 
-				years_since_date, 
-				current_month_date_count, 
-				current_day_date_count, 
-				current_hour_date_count, 
-				current_minute_date_count, 
-				current_second_date_count
-			  );
-
-		printf("Years since date: %i\n", years_since_date);
-
-		months_since_date = years_since_date * 12 + current_month_date_count;
-		printf("Months since date: %i\n", months_since_date);
+				months_since_date = years_since_date * 12 + current_month_date_count;
 
 		days_since_date = current_day_date_count + days_since_date;
 
@@ -264,11 +242,7 @@ int main(void)
 		}
 
 		int weeks_since_date = days_since_date / 7;
-		printf("Weeks since date: %i\n", weeks_since_date);
-
-		printf("Days since date: %i\n", days_since_date);
-
-		int hours_since_date = days_since_date * 24 - 24 + converted_time.hour;
+				int hours_since_date = days_since_date * 24 - 24 + converted_time.hour;
 		// account for the hours on the day of the start date
 		hours_since_date += 24 - hour_date;
 
@@ -282,6 +256,30 @@ int main(void)
 
 		int seconds_since_date = minutes_since_date * 60 + converted_time.sec;
 
+		printf("year: %i, month: %i, day_in_month: %i, week_day: %i\n",
+				converted_time.year,
+				converted_time.month,
+				converted_time.day_in_month,
+				converted_time.week_day
+			  );
+		printf("day_in_year: %i, hour: %i, min: %i, sec: %i\n\n",
+				converted_time.day_in_year,
+				converted_time.hour,
+				converted_time.min,
+				converted_time.sec
+			  );
+		printf("%i years, %i months, %i days, %i hours, %i minutes, %i seconds\n", 
+				years_since_date, 
+				current_month_date_count, 
+				current_day_date_count, 
+				current_hour_date_count, 
+				current_minute_date_count, 
+				current_second_date_count
+			  );
+		printf("Years since date: %i\n", years_since_date);
+		printf("Months since date: %i\n", months_since_date);
+		printf("Weeks since date: %i\n", weeks_since_date);
+		printf("Days since date: %i\n", days_since_date);
 		printf("Hours since date: %i\n", hours_since_date);
 		printf("Minutes since date: %i\n", minutes_since_date);
 		printf("Seconds since date: %i\n", seconds_since_date);
