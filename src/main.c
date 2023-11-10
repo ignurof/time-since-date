@@ -1,12 +1,5 @@
 #include <stdio.h>
 #include "utils.h"
-// all scanf after the first should have a blank space before the conversion specifier in the format string
-// https://stackoverflow.com/questions/13542055/how-to-do-scanf-for-single-char-in-c
-
-int calculate_correct_days_since_date(int, int, int, int, int);
-void print_debug_time(void);
-void print_time_since_date(void);
-void prompt_user(void);
 
 int main(void)
 {
@@ -29,12 +22,61 @@ int main(void)
 		second_date = 0;
 		// DEBUG
 
-		prompt_user();
-		
+		printf("Year of date (19XX): ");
+		// This creates a stray newline for the next input in the stream
+		// all scanf after this should have a blank space before the conversion specifier in the format string
+		// https://stackoverflow.com/questions/13542055/how-to-do-scanf-for-single-char-in-c
+		//scanf("%i", &year_date);
+		int validate_year_input = validate_year(year_date);
+		if(validate_year_input == 0)
+			return 1;
+
+		printf("Month of date (1-12): ");
+		//scanf(" %i", &month_date);
+		int validate_month_input = validate_month(month_date);
+		if(validate_month_input == 0)
+			return 2;
+
+		printf("Day of date (1-31): ");
+		//scanf(" %i", &day_date);
+		int validate_day_input = validate_day(day_date);
+		if(validate_day_input == 0)
+			return 3;
+
+		printf("Hour of date (0-23): ");
+		//scanf(" %i", &hour_date);
+		int validate_hour_input = validate_hour(hour_date);
+		if(validate_hour_input == 0)
+			return 4;
+
+		printf("Minute of date (0-59): ");
+		//scanf(" %i", &minute_date);
+		int validate_minute_input = validate_minute(minute_date);
+		if(validate_minute_input == 0)
+			return 5;
+
+		printf("Second of date (0-59): ");
+		//scanf(" %i", &second_date);
+		int validate_second_input = validate_second(second_date);
+		if(validate_second_input == 0)
+			return 6;
+
 		printf("Getting current time...\n\n");
 		time_object converted_time = handle_time_conversion();
 
-		print_debug_time();
+		printf("year: %i, month: %i, day_in_month: %i, week_day: %i\n",
+				converted_time.year,
+				converted_time.month,
+				converted_time.day_in_month,
+				converted_time.week_day
+			  );
+
+		printf("day_in_year: %i, hour: %i, min: %i, sec: %i\n\n",
+				converted_time.day_in_year,
+				converted_time.hour,
+				converted_time.min,
+				converted_time.sec
+			  );
 
 		int years_since_date = converted_time.year - year_date;
 
@@ -152,14 +194,74 @@ int main(void)
 			current_minute_date_count -= 1;
 		}
 
-		print_time_since_date();
+		printf("%i years, %i months, %i days, %i hours, %i minutes, %i seconds\n", 
+				years_since_date, 
+				current_month_date_count, 
+				current_day_date_count, 
+				current_hour_date_count, 
+				current_minute_date_count, 
+				current_second_date_count
+			  );
+
 		printf("Years since date: %i\n", years_since_date);
 
 		months_since_date = years_since_date * 12 + current_month_date_count;
 		printf("Months since date: %i\n", months_since_date);
 
-		// TODO: turn the stuff into a struct
-		days_since_date = calculate_correct_days_since_date(days_since_date, current_day_date_count, years_since_date, current_month_date_count, year_date);
+		days_since_date = current_day_date_count + days_since_date;
+
+		// calculcate correct days since date
+		if(years_since_date == 0)
+		{
+			days_since_date = 0;
+			int j;
+			for(j = 0; j < current_month_date_count; j++)
+			{
+				switch(j)
+				{
+					case JANUARY:
+						days_since_date += 31;
+						break;
+					case FEBRUARY:
+						days_since_date += 28;
+						if(year_date % 4 == 0) // leap year
+							days_since_date += 1;
+						break;
+					case MARCH:
+						days_since_date += 31;
+						break;
+					case APRIL:
+						days_since_date += 30;
+						break;
+					case MAY:
+						days_since_date += 31;
+						break;
+					case JUNE:
+						days_since_date += 30;
+						break;
+					case JULY:
+						days_since_date += 31;
+						break;
+					case AUGUST:
+						days_since_date += 31;
+						break;
+					case SEPTEMBER:
+						days_since_date += 30;
+						break;
+					case OCTOBER:
+						days_since_date += 31;
+						break;
+					case NOVEMBER:
+						days_since_date += 30;
+						break;
+					case DECEMBER:
+						days_since_date += 31;
+						break;
+				}
+			}
+
+			days_since_date += current_day_date_count;
+		}
 
 		int weeks_since_date = days_since_date / 7;
 		printf("Weeks since date: %i\n", weeks_since_date);
@@ -193,131 +295,4 @@ int main(void)
 	}
 
 	return 0;
-}
-
-int calculate_correct_days_since_date(int days_since_date, int current_day_date_count, int years_since_date, int current_month_date_count, int year_date)
-{
-	days_since_date = current_day_date_count + days_since_date;
-
-	if(years_since_date == 0)
-	{
-		days_since_date = 0;
-		int j;
-		for(j = 0; j < current_month_date_count; j++)
-		{
-			switch(j)
-			{
-				case JANUARY:
-					days_since_date += 31;
-					break;
-				case FEBRUARY:
-					days_since_date += 28;
-					if(year_date % 4 == 0) // leap year
-						days_since_date += 1;
-					break;
-				case MARCH:
-					days_since_date += 31;
-					break;
-				case APRIL:
-					days_since_date += 30;
-					break;
-				case MAY:
-					days_since_date += 31;
-					break;
-				case JUNE:
-					days_since_date += 30;
-					break;
-				case JULY:
-					days_since_date += 31;
-					break;
-				case AUGUST:
-					days_since_date += 31;
-					break;
-				case SEPTEMBER:
-					days_since_date += 30;
-					break;
-				case OCTOBER:
-					days_since_date += 31;
-					break;
-				case NOVEMBER:
-					days_since_date += 30;
-					break;
-				case DECEMBER:
-					days_since_date += 31;
-					break;
-			}
-		}
-
-		days_since_date += current_day_date_count;
-	}
-
-	return days_since_date;
-}
-
-void print_debug_time(void)
-{
-	printf("year: %i, month: %i, day_in_month: %i, week_day: %i\n",
-			converted_time.year,
-			converted_time.month,
-			converted_time.day_in_month,
-			converted_time.week_day
-		  );
-
-	printf("day_in_year: %i, hour: %i, min: %i, sec: %i\n\n",
-			converted_time.day_in_year,
-			converted_time.hour,
-			converted_time.min,
-			converted_time.sec
-		  );
-}
-
-void print_time_since_date(void)
-{
-	printf("%i years, %i months, %i days, %i hours, %i minutes, %i seconds\n", 
-			years_since_date, 
-			current_month_date_count, 
-			current_day_date_count, 
-			current_hour_date_count, 
-			current_minute_date_count, 
-			current_second_date_count
-		  );
-}
-
-void prompt_user(void)
-{
-	printf("Year of date (19XX): ");
-	//scanf("%i", &year_date);
-	int validate_year_input = validate_year(year_date);
-	if(validate_year_input == 0)
-		return 1;
-
-	printf("Month of date (1-12): ");
-	//scanf(" %i", &month_date);
-	int validate_month_input = validate_month(month_date);
-	if(validate_month_input == 0)
-		return 2;
-
-	printf("Day of date (1-31): ");
-	//scanf(" %i", &day_date);
-	int validate_day_input = validate_day(day_date);
-	if(validate_day_input == 0)
-		return 3;
-
-	printf("Hour of date (0-23): ");
-	//scanf(" %i", &hour_date);
-	int validate_hour_input = validate_hour(hour_date);
-	if(validate_hour_input == 0)
-		return 4;
-
-	printf("Minute of date (0-59): ");
-	//scanf(" %i", &minute_date);
-	int validate_minute_input = validate_minute(minute_date);
-	if(validate_minute_input == 0)
-		return 5;
-
-	printf("Second of date (0-59): ");
-	//scanf(" %i", &second_date);
-	int validate_second_input = validate_second(second_date);
-	if(validate_second_input == 0)
-		return 6;
 }
