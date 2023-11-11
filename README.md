@@ -1,6 +1,9 @@
 # time-since-date 
 
 ## Changelog
+### v0.2.0
+- Moved date time functionality to thyme.c https://github.com/ignurof/thyme
+- Preparing to keep program as only frontend (input, sanitize, errors, output)
 ### v0.1.2
 - Add weeks since date calculation.
 ### v0.1.1
