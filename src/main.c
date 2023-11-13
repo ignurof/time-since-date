@@ -3,7 +3,18 @@
 
 int main(void)
 {
-	struct tsd time_since_date = get_time_since_date();
+	struct dti date_time_input = {2023, 1, 5, 9, 42, 0};
+
+	struct tsd time_since_date = get_time_since_date(date_time_input);
+
+	printf("%i years, %i months, %i days, %i hours, %i minutes, %i seconds\n", 
+			time_since_date.years_since_date, 
+			time_since_date.current_month_date_count, 
+			time_since_date.current_day_date_count, 
+			time_since_date.current_hour_date_count, 
+			time_since_date.current_minute_date_count, 
+			time_since_date.current_second_date_count
+		  );
 
 	printf("Years since date: %i\n", time_since_date.years_since_date);
 	printf("Months since date: %i\n", time_since_date.months_since_date);
