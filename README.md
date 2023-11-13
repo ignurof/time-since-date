@@ -1,6 +1,8 @@
 # time-since-date 
 
 ## Changelog
+### v0.2.1
+- Prepare for input rework by passing data from program to thyme library.
 ### v0.2.0
 - Moved date time functionality to thyme.c https://github.com/ignurof/thyme
 - Preparing to keep program as only frontend (input, sanitize, errors, output)
